@@ -29,7 +29,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
+											<tr v-for="guns in gunLists">
 												<td>1</td>
 												<td>Steve</td>
 												<td>Jobs</td>
