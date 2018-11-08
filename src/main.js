@@ -7,14 +7,17 @@ import VueRouter from "vue-router"
 //使用axios进行http请求
 import axios from "axios";
 
+
 import Home from './components/main/Home'
 import Login from './components/entrance/Login'
 import Elements from './components/main/other/Elements'
 import Tables from './components/main/other/Tables'
 import GunList from './components/main/other/GunList'
 
+
 //使用路由
 Vue.use(VueRouter)
+
 //使用Axios
 Vue.prototype.$axios = axios
 
