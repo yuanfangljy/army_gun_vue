@@ -15,7 +15,7 @@ module.exports = {
         target: 'http://127.0.0.1:8888', //源地址 
         changeOrigin: true, //改变源 
         pathRewrite: {
-          '^/api': 'http://127.0.0.1:8888' //这里理解成用‘/api’代替target里面的地址，组件中我们调接口时直接用/api代替
+          '^/api': '/' //这里理解成用‘/api’代替target里面的地址，组件中我们调接口时直接用/api代替
                     // 比如我要调用'http://0.0:300/user/add'，直接写‘/api/user/add’即可 代理后地址栏显示/
         }
       } 
