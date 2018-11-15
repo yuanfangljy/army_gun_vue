@@ -19,14 +19,14 @@
           <div class="sidebar-scroll">
             <nav>
               <ul class="nav">
-								<li><router-link :to="{name:'Elements'}" class="active"><i class="lnr lnr-home"></i> <span>实时动态</span></router-link></li>
+								<li><router-link :to="{name:'Map'}" class=""><i class="lnr lnr-home"></i> <span>实时动态</span></router-link></li>
 								<li><router-link :to="{name:'DistributionStorage'}" class=""><i class="lnr lnr-home"></i> <span>枪支分配</span></router-link></li>
                 <li><router-link :to="{name:'Predistribution'}" class=""><i class="lnr lnr-home"></i> <span>枪支预出库</span></router-link></li>
                 <li><router-link :to="{name:'FinalStorage'}" class=""><i class="lnr lnr-home"></i> <span>枪支出库</span></router-link></li>
 								<li><router-link :to="{name:'StorageWarehouse'}" class=""><i class="lnr lnr-home"></i> <span>枪支入库</span></router-link></li>
 								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>警告信息</span></router-link></li>
 								<li><router-link :to="{name:'GunList'}" class=""><i class="lnr lnr-home"></i> <span>枪支列表</span></router-link></li>
-								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>警员管理</span></router-link></li>
+								<li><router-link :to="{name:'Login'}" class=""><i class="lnr lnr-home"></i> <span>警员管理</span></router-link></li>
 								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>库室管理</span></router-link></li>
 								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>射弹计数</span></router-link></li>
 							

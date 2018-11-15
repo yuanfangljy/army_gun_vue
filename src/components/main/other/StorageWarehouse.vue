@@ -8,14 +8,14 @@
 					<div class="row">
 
                         	<!-- INPUT SIZING -->
-							<div class="panel">
+							<!-- <div class="panel">
 								<button type="button" class="btn btn-primary btn-sm"  v-on:click="storagePreselecteds()">
 										批量预出库
 								</button>
 								<button type="button" class="btn btn-warning btn-sm"  v-on:click="storagePreselecteds()">
 										批量撤销
 								</button>
-							</div>
+							</div> -->
 
 						<div class="col-md-6">
 							<!-- TASKS -->
@@ -41,7 +41,7 @@
                                         
 										<tbody>
 											<tr  v-for="(warehouse,index) in filterBy(warehouseList,filterInput)" :key="">
-												<td><input type="checkbox" class="wrIdcheckItem" v-bind:value="warehouse.gunId" v-model="checkDataIds">
+												<td style="width:63px"><input type="checkbox" class="wrIdcheckItem" v-bind:value="warehouse.gunId" v-model="checkDataIds">
                                                     <input type="hidden" :id='warehouse.gunId' v-bind:value="warehouse.apps.appImei" >
                                                 </td>
 												<td class="text-center">{{warehouse.appId}}</td>
@@ -107,16 +107,16 @@
 										</thead>
 										<tbody>
 											<tr v-for="warehouses in filterBys(warehouseLists,filterInputs)" :key="">
-												<td><input type="checkbox" class="wrIdcheckItems" v-bind:value="warehouses.gunId" v-model="checkDataIdss"></td>
+												<td style="width:63px"><input type="checkbox" class="wrIdcheckItems" v-bind:value="warehouses.gunId" v-model="checkDataIdss"></td>
 												<td class="text-center">{{warehouses.appId}}</td>
 												<td class="text-center">{{warehouses.gunId}}</td>
                         <td class="text-center">{{warehouses.guns.gunMac}}</td>
                         <td class="text-center">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-sm"  v-on:click="affirmStorage(warehouses.gunId,warehouses.gunMac,warehouses.apps.appImei)">
+                            <button type="button" class="btn btn-primary btn-sm"  v-on:click="affirmStorage(warehouses.gunId,warehouses.guns.gunMac,warehouses.apps.appImei)">
                                 入库
                             </button>
-                            <button type="button" class="btn btn-warning btn-sm"  v-on:click="revocationStorage(warehouses.gunId,warehouses.gunMac,warehouses.apps.appImei)">
+                            <button type="button" class="btn btn-warning btn-sm"  v-on:click="revocationStorage(warehouses.gunId,warehouses.guns.gunMac,warehouses.apps.appImei)">
                                 撤销
                             </button>
                             <!-- Button trigger modal -->
@@ -147,7 +147,7 @@
 							</div>
 							<!-- END TASKS -->
 						</div>
-					{{appImeis}}{{totalj}}{{total}}
+				<!-- 	{{appImeis}}{{totalj}}{{total}} -->
 					</div>
 				</div>
 			</div>
@@ -289,9 +289,9 @@ export default {
           console.log(response.data.extend.pageInfo.list);
 
           this.warehouseLists = response.data.extend.pageInfo.list;
-           for (const iterator of this.warehouseLists) {
+        /*    for (const iterator of this.warehouseLists) {
                     alert(iterator.gunId);
-                } 
+                }  */
         /*   this.warehouseList = response.data.extend.pageInfo.list; */
           var listPage = response.data.extend.pageInfo;
           this.allj = listPage.pages; //总页数
@@ -339,6 +339,7 @@ export default {
 
     //确认入库
     affirmStorage(gunId, gunMac, appImei) {
+      alert(gunId+"---"+gunMac+"----"+appImei)
       this.$axios
         .delete(
           "/wareHouseRecords/revocationWareHouseRecordsStorage?gunId=" +
@@ -393,7 +394,7 @@ export default {
     },
   },
   created() {
-    //this.getWarehouseList(this.pn);
+    this.getWarehouseList(this.pn);
     this.getWarehouseLists(this.pnj);
   },
   computed: {

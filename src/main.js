@@ -4,22 +4,16 @@ import Vue from 'vue'
 import App from './App'
 //引用路由
 import VueRouter from "vue-router"
+//引入公共路由通道
+import { routes } from "./router/routes.js"
 //使用axios进行http请求
-import axios from "axios";
+import axios from "axios"
+//对状态进行管理
+import vuex from 'vuex'
 
 
-import Home from './components/main/Home'
-import Login from './components/entrance/Login'
-import Elements from './components/main/other/Elements'
-import Tables from './components/main/other/Tables'
-import GunList from './components/main/other/GunList'
-import DeliveryWarehouse from "./components/main/other/DeliveryWarehouse"
-import AllocationGun from "./components/main/other/AllocationGun"
-import StorageWarehouse from "./components/main/other/StorageWarehouse"
-import DistributionStorage from "./components/main/other/DistributionStorage"
-import Predistribution from "./components/main/other/Predistribution"
-import FinalStorage from "./components/main/other/FinalStorage"
-
+//状态存储是响应式
+Vue.use(vuex)
 //使用路由
 Vue.use(VueRouter)
 
@@ -54,26 +48,39 @@ Vue.config.productionTip = false
 
 //配置路由、
 const router=new VueRouter({
+  routes,
   mode:"history",
-  routes:[
-    {
-      path: "/", name: "Home", components: {
-      default: Home,//默认显示
-    }},
-   // { path: "/", name: "Home", component: Home },
-    { path: "/elements", name: "Elements", component: Elements },
-    { path: "/login", name: "Login", component: Login },
-    { path: "/tables", name: "Tables", component: Tables },
-    { path: "/gunList", name: "GunList", component: GunList },
-    { path: "/deliveryWarehouse", name: "DeliveryWarehouse", component: DeliveryWarehouse },
-    { path: "/allocationGun", name: "AllocationGun", component: AllocationGun },
-    { path: "/storageWarehouse", name: "StorageWarehouse", component: StorageWarehouse },
-    { path: "/distributionStorage", name: "DistributionStorage", component: DistributionStorage },
-    { path: "/predistribution", name: "Predistribution", component: Predistribution },
-    { path: "/finalStorage", name: "FinalStorage", component: FinalStorage },
-    
-    
-  ]
+  scrollBehavior(to, from, savedPosition) {//路由控制滚动行为
+    //return {x:0,y:100}
+    //return {selector:'.btn'}
+    //回到浏览器上次页面的位置
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
+  
+})
+
+
+//全局守卫
+/**
+ * == 1、全局守卫 ==
+ * 回调函数
+ * to:你要弄进入到哪一个路由中
+ * from:你从哪一个路由离开  
+ * next：对应的函数
+ */
+router.beforeEach((to, from, next) => {
+    //console.log(to);
+  //判断store.gettes.isLogin===fasle
+  if (to.path == '/' || to.path =='/gunList'){
+    next();//会正常访问，加false就不会访问
+  }else{
+    //alert("请先登录！");
+    next(true);
+  }
 })
 
 /* eslint-disable no-new */

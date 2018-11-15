@@ -39,7 +39,7 @@
 										<tbody>
 											
 											<tr v-for="(appsP,index) in filterByPreselected(appListPreselected,filterInputPreselected)" :key="">
-												<td><span>{{index+1}}</span></td>
+												<td style="width:63px"><span>{{index+1}}</span></td>
 												<td class="text-center">{{appsP.appName}}</td>
 												<td class="text-center">{{appsP.counts}}</td>
 												<td class="text-center">

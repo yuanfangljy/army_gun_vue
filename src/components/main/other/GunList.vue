@@ -12,15 +12,14 @@
 							<!-- BORDERED TABLE -->
 							<div class="panel">
 								<div class="panel-heading">
-									<h3 class="panel-title">Bordered Table</h3>
-									
+									<h3 class="panel-title">枪支列表</h3>
 								</div>
-								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalAdd" @click="createGunS">
-											新增
-								</button>
-								<button type="button" class="btn btn-danger btn-sm"  @click="deleteGunAll">
-											批量删除
-								</button>
+                <div class="col-md-offset-10">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalAdd" @click="createGunS">
+                        <i class="fa fa-plus-square"></i> 新增
+                  </button>
+								</div>
+
 								<div class="panel-body">
 									<input type="text" class="form-control" placeholder="搜索" v-model="filterInput">
 									<table class="table table-bordered">
@@ -65,6 +64,10 @@
 											</tr>
 										</tbody>
 									</table>
+
+                  <button type="button" class="btn btn-danger btn-sm" id="batchAllocation" disabled="disabled"  @click="deleteGunAll">
+											<i class="fa fa-trash-o"></i> 批量删除
+								  </button>
 
 									 <div class="text-center" v-show="total>pageSize">
                       <div class="row">
@@ -270,6 +273,11 @@ export default {
     // 监视双向绑定的数据数组
     checkDataIds: {
       handler() {
+        if(this.checkDataIds.length==0){
+          $("#batchAllocation").attr('disabled', 'disabled');
+        }else{
+          $("#batchAllocation").removeAttr('disabled');
+        }
         // 数据数组有变化将触发此函数
         /*   if (this.checkDataIds.length == 4) {
           document.querySelector("#cAll").checked = true;
@@ -412,11 +420,17 @@ export default {
           });
       }
     },
+    //重置表单数据
+    reset_from(ele){
+         //重置表单内容
+        $(ele)[0].reset();
+    },
     //新增过度开启
     createGunS() {
       this.isShow = false;
       this.isShowTime = false;
       this.headlineGun = "新增枪支信息";
+      this.reset_from("#exampleModalAdd form");
     },
     //新增枪支信息
     createGun(e) {

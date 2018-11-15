@@ -6,27 +6,39 @@
 				<div class="container-fluid">
 					<h3 class="page-title">枪支分配</h3>
 					<div class="row">
-
 						<!-- INPUT SIZING -->
 							<div class="panel">
 								<div class="panel-body">
-									<select class="form-control"  @click="getUserApp()" v-model="selectedUser">
-										<option disabled value="">请选择用户</option>
-										<option v-for="userApps in userAppList" :value="userApps.userId">
-												{{userApps.userName}}
-										</option>
-									</select>
-                                    <select class="form-control"  @click="getApp()" v-model="selectedApp">
-										<option disabled value="">请选择设备</option>
-										<option v-for="apps in appList" :value="apps.id">
-												{{apps.appName}}
-										</option>
-									</select>
-                                   
+
+                  
+                    <form class="form-horizontal">
+                      <div class="row">
+                        <div class="">
+                          <label class="col-sm-2 control-label">用户</label>
+                          <div class="col-md-3">
+                            <select class="form-control"  @click="getUserApp()" v-model="selectedUser">
+                                <option disabled value="">请选择用户</option>
+                                <option v-for="userApps in userAppList" :value="userApps.userId">
+                                    {{userApps.userName}}
+                                </option>
+                              </select>
+                          </div>
+                        </div>
+                          <label for="inputPassword" class="col-sm-2 control-label">设备</label>
+                          <div class="col-sm-3">
+                            <select class="form-control"  @click="getApp()" v-model="selectedApp">
+                                <option disabled value="">请选择设备</option>
+                                <option v-for="apps in appList" :value="apps.id">
+                                    {{apps.appName}}
+                                </option>
+                              </select>
+                          </div>
+                      </div>
+                    </form>
+                  
+
 								</div>
-								<button type="button" class="btn btn-primary btn-sm"  v-on:click="distributionStorageAll()">
-										批量枪支分配
-								</button>
+                
 							</div>
 								
 						<!-- END INPUT SIZING -->
@@ -42,10 +54,10 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<table class="table table-bordered">
+									<table class="table table-bordered table-hover">
 										<thead>
 											<tr>
-												<th style="width:65px"><input id="cAllNP" type="checkbox" @click="checkAllNP($event)"></th>
+												<th style="width:63px"><input id="cAllNP" type="checkbox" @click="checkAllNP($event)"></th>
 												<th class="text-center">枪支编号</th>
 												<th class="text-center">枪支型号</th>
 												<th class="text-center">枪支类型</th>
@@ -71,19 +83,24 @@
 										</tbody>
 									</table>
                   
+                  <div>
+                      <button type="button" class="btn btn-primary btn-sm" id="batchAllocation" disabled="disabled"  v-on:click="distributionStorageAll()">
+                          批量枪支分配
+                      </button>
+                  </div>
                     <div class="text-center" v-show="total>pageSize">
                       <div class="row">
                         <!-- 分页显示 -->
                         <div class="page-bar" style=" margin:0 auto; margin-left:20%;">
                           <ul>
                               <li v-if="cur>1"><a v-on:click="cur=1,pageClick()">首页</a></li>
-                              <li v-if="cur>1"><a v-on:click="cur--,pageClick()"><</a></li>
-                              <li v-if="cur==1"><a class="banclick"><</a></li>
+                              <li v-if="cur>1"><a v-on:click="cur--,pageClick()"><span aria-hidden="true">&laquo;</span></a></li>
+                              <li v-if="cur==1"><a class="banclick"><span aria-hidden="true">&laquo;</span></a></li>
                               <li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
                                   <a v-on:click="btnClick(index)">{{ index }}</a>
                               </li>
-                              <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">></a></li>
-                              <li v-if="cur == all"><a class="banclick">></a></li>
+                              <li v-if="cur!=all"><a v-on:click="cur++,pageClick()"><span aria-hidden="true">&raquo;</span></a></li>
+                              <li v-if="cur == all"><a class="banclick"><span aria-hidden="true">&raquo;</span></a></li>
                               <li v-if="cur!=all"><a v-on:click="cur=all,pageClick()">尾页</a></li>
                               <li><a>到第<i>{{cur}}</i>页</a></li>
                               <li><a>共<i>{{all}}</i>页</a></li>
@@ -132,6 +149,11 @@ export default {
     // 监视双向绑定的数据数组
     checkDataIdsNP: {
       handler() {
+        if(this.checkDataIdsNP.length==0){
+          $("#batchAllocation").attr('disabled', 'disabled');
+        }else{
+          $("#batchAllocation").removeAttr('disabled');
+        }
         // 数据数组有变化将触发此函数
         /*    if (this.checkDataIdsNP.length == 5) {
           document.querySelector("#cAllNP").checked = true;
@@ -156,6 +178,7 @@ export default {
   },
   methods: {
     checkAllNP(e) {
+       
       // 点击全选事件函数
       let checkObj = document.querySelectorAll(".gIdcheckItemNP"); // 获取所有checkbox项
       if (e.target.checked) {
@@ -261,8 +284,10 @@ export default {
     pageClick: function() {
       this.getGunListNotPreselected(this.cur);
       console.log("现在在" + this.cur + "页");
-    }
+    },
+   
   },
+
   //进入页面就进行显示
   created() {
     this.getGunListNotPreselected(this.pn);
