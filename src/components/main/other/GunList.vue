@@ -371,7 +371,7 @@ export default {
       } else {
         var qs = require("qs");
         let params = new URLSearchParams();
-        params.append("id", this.gun.id),
+          params.append("id", this.gun.id),
           params.append("uid", this.gun.uid),
           params.append("isDel", this.gun.isDel),
           params.append("gunId", this.gun.gunId),
@@ -443,7 +443,7 @@ export default {
       } else {
         var qs = require("qs");
         let params = new URLSearchParams();
-        params.append("gunId", this.$refs.gunId.value),
+          params.append("gunId", this.$refs.gunId.value),
           params.append("gunModel", this.$refs.gunModel.value),
           params.append("gunType", this.$refs.gunType.value),
           params.append("gunMac", this.$refs.gunMac.value),

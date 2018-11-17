@@ -26,7 +26,7 @@
 								<li><router-link :to="{name:'StorageWarehouse'}" class=""><i class="lnr lnr-home"></i> <span>枪支入库</span></router-link></li>
 								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>警告信息</span></router-link></li>
 								<li><router-link :to="{name:'GunList'}" class=""><i class="lnr lnr-home"></i> <span>枪支列表</span></router-link></li>
-								<li><router-link :to="{name:'Login'}" class=""><i class="lnr lnr-home"></i> <span>警员管理</span></router-link></li>
+								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>警员管理</span></router-link></li>
 								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>库室管理</span></router-link></li>
 								<li><router-link :to="{name:'Elements'}" class=""><i class="lnr lnr-home"></i> <span>射弹计数</span></router-link></li>
 							

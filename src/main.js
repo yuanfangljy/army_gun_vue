@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 //引用路由
 import VueRouter from "vue-router"
-//引入公共路由通道
+  //引入公共路由通道
 import { routes } from "./router/routes.js"
 //使用axios进行http请求
 import axios from "axios"
@@ -72,7 +72,8 @@ const router=new VueRouter({
  * from:你从哪一个路由离开  
  * next：对应的函数
  */
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
+  //next("/login");
     //console.log(to);
   //判断store.gettes.isLogin===fasle
   if (to.path == '/' || to.path =='/gunList'){
@@ -81,7 +82,7 @@ router.beforeEach((to, from, next) => {
     //alert("请先登录！");
     next(true);
   }
-})
+}) */
 
 /* eslint-disable no-new */
 new Vue({

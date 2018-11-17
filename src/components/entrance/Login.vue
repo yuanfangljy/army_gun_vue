@@ -1,19 +1,20 @@
 <template>
-  <div class="login">
+  <div id="login">
         <div class="nav_bg">
             <div class="bor">
                 <div class="wel">用户登录</div>
                 <form id="login_form" method="POST">
                     <div class="Login">
                         <img src="img/yonghu.png"/>
-                        <p><input type="text" id="userName" name="userName" placeholder="用户名"></p>
+                        <p><input type="text" id="userName"  placeholder="用户名" ref="userName"></p>
                     </div>
                     <div class="pass">
                         <img src="img/pass.png"/>
-                        <p><input type="password" id="passWord" name="passWord" placeholder="请输入密码"></p>
+                        <p><input type="password" id="passWord"  placeholder="请输入密码" ref="passWord"></p>
                     </div>
                     <div></div>
-                    <p><input class="sure" type="button" id="login" value="登录"/></p>
+                    <p><input class="sure" type="button" id="login" @click="loginSubmit()" value="登录"/></p>
+
                 </form>
                 <dl class="sign">
                     <dt><a href="retrievePassword.html">忘记密码？</a></dt>
@@ -34,16 +35,42 @@
 
 <script>
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
+
+    };
+  },
+  methods: {
+    loginSubmit() {
+      //获取登录信息
+      let _this = this;
+      var userName = _this.$refs.userName.value;
+      var passWord = _this.$refs.passWord.value;
+      if(!userName || !passWord){
+        alert("用户或者密码不能为空");
+      }else{
+          let params = new URLSearchParams();
+          params.append("webUserName", userName),
+          params.append("webUserPassword", passWord),
+
+          this.$axios.post('/webUser/loginWeb',params)
+                     .then(response =>{
+                         console.log(response.data);
+                         var user=response.data;
+                         if(user.status=="1000"){
+                            this.$router.replace('/')
+                         }else{
+                              $("#error").text("用户名不能为空");
+                         }
+                     })
+      }
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import '../common/css/loginForm';
-
+@import "../common/css/loginForm";
 </style>

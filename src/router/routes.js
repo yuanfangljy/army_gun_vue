@@ -1,6 +1,4 @@
 
-import Home from '../components/main/Home'
-import Login from '../components/entrance/Login'
 import Elements from '../components/main/other/Elements'
 import Tables from '../components/main/other/Tables'
 import GunList from '../components/main/other/GunList'
@@ -11,7 +9,7 @@ import DistributionStorage from "../components/main/other/DistributionStorage"
 import Predistribution from "../components/main/other/Predistribution"
 import FinalStorage from "../components/main/other/FinalStorage"
 import Map from "../components/main/Map"
-
+import Home from "../components/main/Home"
 
 
 //配置路由
@@ -22,8 +20,8 @@ export const routes = [
         }
     },
     // { path: "/", name: "Home", component: Home },
+    { path: "/home", name: "Home", component: Home },
     { path: "/elements", name: "Elements", component: Elements },
-    { path: "/login", name: "Login", component: Login },
     { path: "/tables", name: "Tables", component: Tables },
     { path: "/gunList", name: "GunList", component: GunList },
     { path: "/deliveryWarehouse", name: "DeliveryWarehouse", component: DeliveryWarehouse },
